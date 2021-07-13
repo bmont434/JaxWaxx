@@ -1,0 +1,23 @@
+﻿<div class="row opake">
+    <div class="col-md-12 padding-50" align="center">
+        <h2>Shop Candles</h2>
+    </div>
+</div>
+
+<div class="container">
+    @foreach (var p in ViewBag.Prod)
+    {
+        <div class="col-md-4 padding-10" align="center">
+            <a href="#"><img class="img-responsive center-block" src="~/images/@p.ProductImage" border="0"></a>
+            <h3>@p.ProductName</h3>
+            <div class="bboarder"></div>
+            <div class="fontsize"><p>Price: @string.Format("{0:C}", p.ProductPrice)</p></div>
+            <button class="button button3" onclick="location.href='@Url.Action("ShoppingCart", "Cart", new { id = p.ProductID })'">Add to Cart</button>
+
+        </div>
+    }
+</div>
+
+
+
+

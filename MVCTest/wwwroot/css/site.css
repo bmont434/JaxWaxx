@@ -1,0 +1,198 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+#section1 {
+    
+    background-color: white;
+}
+
+#section2 {
+   
+    background-color: whitesmoke;
+    
+}
+
+#section3 {
+    background-color: whitesmoke;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url("../images/background6.jpg");
+    /* Set a specific height */
+    min-height: 300px;
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.fontsize p
+{
+    color: grey;
+    font-size:15px;
+}
+
+.button {
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button3 {
+    border-radius: 8px;
+}
+
+.button4 {
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+}
+
+input[type=submit] {
+    background-color: black; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+input[type=submit] {
+    border-radius: 8px;
+}
+
+
+.opake {
+    background-color: #E3E4E6;
+}
+
+.Bcolor2 {
+    background-color: black;
+}
+
+    .opake h2 {
+        font-family: Stencil;
+        font-weight: bold;
+    }
+
+.about h2 {
+    font-family: Arial;
+    font-weight: bold;
+    margin-top: calc(25%);
+}
+
+.container2 {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.bboarder {
+    border-bottom-style: solid;
+    border-bottom-color: lightgrey;
+}
+
+.padding-0 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.padding-10 {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.padding-50 {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.carousel-inner {
+    width: 100%;
+    max-height: 900px;
+}
+
+.carousel-caption {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.carousel-caption p {
+    color: white;
+    font-size: 50px;
+}
+
+.navbar {
+    min-height: 60px;
+}
+
+.navbar-nav li a {
+    font-family: Georgia;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 750px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
