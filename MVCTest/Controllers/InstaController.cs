@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json;
-
+using Microsoft.AspNetCore.Routing;
 
 namespace MVCTest.Controllers
 {
@@ -17,32 +17,48 @@ namespace MVCTest.Controllers
         [HttpGet]
         public IActionResult InstaIntegration()
         {
-            
-            Task<MyData> test12 = Postr();
-            test12.Wait();
-            getr(test12.Result);
-            return View();
+
+            if (string.IsNullOrEmpty(HttpContext.Request.Query["code"].ToString()) != true)
+            {
+                string AccessTkn = HttpContext.Request.Query["code"].ToString();
+                Task<MyData> Post1 = Postr(AccessTkn);
+                Post1.Wait();
+                getr(Post1.Result).Wait();
+                return View();
+            }
+            else
+            {
+                return View();
+            }
 
         }
 
-
-        public async void getr(MyData ID)
+        public async Task<InstaData> getr(MyData ID)
         {
-            //var client = new HttpClient();
-            //var content = client.GetStringAsync("http://webcode.me");
             ViewBag.AccessToken = ID.access_token;
             ViewBag.UserID = ID.user_id;
 
             var httpClient = new HttpClient();
-            var request = new HttpRequestMessage(new HttpMethod("GET"), "https://graph.instagram.com/" + ID.user_id.ToString() + "?fields=id,username&access_token=" + ID.access_token.ToString());
+            var request = new HttpRequestMessage(new HttpMethod("GET"), "https://graph.instagram.com/" + ID.user_id.ToString() + "?fields=id,media_type,media_url,username&access_token=" + ID.access_token.ToString());
             var response = await httpClient.SendAsync(request);
-                
-            
+            var content = await response.Content.ReadAsStringAsync();
+
+            InstaData tmp = JsonConvert.DeserializeObject<InstaData>(content);
+
+            if (tmp.id != null)
+            {
+                ViewBag.AccessToken = tmp.username;
+                return tmp;
+            }
+            else
+            {
+                return null;
+            }
 
         }
 
 
-        public async Task<MyData> Postr()
+        public async Task<MyData> Postr(string AccessTkn)
         {
             var httpClient = new HttpClient();
 
@@ -53,11 +69,10 @@ namespace MVCTest.Controllers
             multipartContent.Add(new StringContent(""), "client_secret");
             multipartContent.Add(new StringContent("authorization_code"), "grant_type");
             multipartContent.Add(new StringContent("https://localhost:44344/Insta/InstaIntegration/"), "redirect_uri");
-            multipartContent.Add(new StringContent(""), "code");
+            multipartContent.Add(new StringContent(AccessTkn), "code");
             request.Content = multipartContent;
 
             var response = await httpClient.SendAsync(request);
-            //ViewBag.test = "TEST TSETE TSETSET";
             var content = await response.Content.ReadAsStringAsync();
             MyData tmp = JsonConvert.DeserializeObject<MyData>(content);
 
@@ -66,12 +81,10 @@ namespace MVCTest.Controllers
 
                 return tmp;
             }
-           else
+            else
             {
                 return null;
             }
-            
-            
 
         }
 
@@ -79,8 +92,17 @@ namespace MVCTest.Controllers
 
     public class MyData
     {
-         public string access_token {get; set ;}
-         public string user_id { get; set; }
+        public string access_token { get; set; }
+        public string user_id { get; set; }
+
+    }
+
+    public class InstaData
+    {
+        public string media_type { get; set; }
+        public string id { get; set; }
+        public string media_url { get; set; }
+        public string username { get; set; }
 
     }
 
